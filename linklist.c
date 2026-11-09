@@ -17,15 +17,3 @@ struct Song {
     struct Song* next;
 };
 
-int main(struct Song** head, const char* artist, const char* name, int year) {
-    struct Song* newSong = (struct Song*)malloc(sizeof(struct Song));
-    if (!newSong) {
-        return -1; 
-    }
-    strncpy(newSong->artist, artist, sizeof(newSong->artist) - 1);
-    strncpy(newSong->name, name, sizeof(newSong->name) - 1);
-    newSong->year = year;
-    newSong->next = *head;
-    *head = newSong;
-    return 0; 
-}
