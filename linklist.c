@@ -80,3 +80,30 @@ void printPlaylist(struct Song* head) {
         trackNum++;
     }
 }
+
+int main() {
+    struct Song* myPlaylist = NULL;
+
+    addSong(&myPlaylist, "The Beatles", "Hey Jude", 1968);
+    addSong(&myPlaylist, "Queen", "Bohemian Rhapsody", 1975);
+    addSong(&myPlaylist, "Michael Jackson", "Thriller", 1982);
+
+    printf("\nOriginal Playlist\n");
+    printPlaylist(myPlaylist);
+
+    printf("\nRemoving 'Bohemian Rhapsody' from the playlist...\n");
+    removeSong(&myPlaylist, "Bohemian Rhapsody");
+
+    printf("\nUpdated Playlist\n");
+    printPlaylist(myPlaylist);
+
+    struct Song* current = myPlaylist;
+    struct Song* nextSong;
+    while (current != NULL) {
+        nextSong = current->next;
+        free(current);
+        current = nextSong;
+    }
+
+    return 0;
+}
