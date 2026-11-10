@@ -42,3 +42,26 @@ void addSong(struct Song** head, const char* artist, const char* name, int year)
     temp->next = newSong;
 }
 
+void removeSong(struct Song** head, const char* name) {
+    struct Song* temp = *head;
+    struct Song* prev = NULL;
+
+    if (temp != NULL && strcmp(temp->name, name) == 0) {
+        *head = temp->next; 
+        free(temp);         
+        return;
+    }
+
+    while (temp != NULL && strcmp(temp->name, name) != 0) {
+        prev = temp;
+        temp = temp->next;
+    }
+
+    if (temp == NULL) {
+        printf("\nSong '%s' not found in the playlist.\n", name);
+        return;
+    }
+
+    prev->next = temp->next;
+    free(temp);
+}
