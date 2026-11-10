@@ -65,3 +65,18 @@ void removeSong(struct Song** head, const char* name) {
     prev->next = temp->next;
     free(temp);
 }
+
+void printPlaylist(struct Song* head) {
+    if (head == NULL) {
+        printf("The playlist is empty.\n");
+        return;
+    }
+
+    struct Song* temp = head;
+    int trackNum = 1;
+    while (temp != NULL) {
+        printf("%d. \"%s\" by %s (%d)\n", trackNum, temp->name, temp->artist, temp->year);
+        temp = temp->next;
+        trackNum++;
+    }
+}
