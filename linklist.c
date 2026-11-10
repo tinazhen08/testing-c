@@ -9,6 +9,7 @@ longer contains the delete song. */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 struct Song {
     char artist[100];
@@ -16,4 +17,28 @@ struct Song {
     int year;
     struct Song* next;
 };
+
+void addSong(struct Song** head, const char* artist, const char* name, int year) {
+    struct Song* newSong = (struct Song*)malloc(sizeof(struct Song));
+    if (newSong == NULL) {
+        printf("Memory allocation failed!\n");
+        return;
+    }
+    
+    strcpy(newSong->artist, artist);
+    strcpy(newSong->name, name);
+    newSong->year = year;
+    newSong->next = NULL;
+
+    if (*head == NULL) {
+        *head = newSong;
+        return;
+    }
+
+    struct Song* temp = *head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    temp->next = newSong;
+}
 
